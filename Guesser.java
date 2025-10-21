@@ -1,12 +1,5 @@
 import java.io.Console;
 
-/**
- * Assignment 1 - Guessing Game
- * 
- * Here's the unfinished source code
- * for the Guesser class. It is your
- * task to complete the missing parts.
- */
 public class Guesser{
   private int low;
   private int high;
@@ -22,7 +15,10 @@ public class Guesser{
    *
    */
   
-  // Write the constructor below this line.
+	public Guesser (int low, int high) {
+	this.low = l;
+	this.high = h;
+	}
 
 
   /*
