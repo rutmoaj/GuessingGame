@@ -29,8 +29,9 @@ public class Guesser{
     System.out.println("Please answer T or F:");
     reply = System.console().readLine();
     }
+
     return reply;
-  }
+    }
 
   private void doGuesses(){
     int i=0; // number of guesses
