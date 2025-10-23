@@ -1,0 +1,56 @@
+Frågor
+
+1.Vad är pull repektive push?
+
+   PUSH är ett kommando du kan skriva i terminalen för att "pusha upp", det vill säga skicka
+   dina förändringar till ditt fjärr-repository som till exempel GitHub.
+   Skriver du "git push" kommer de ändringar du gjort till filer (som finns i staging area och committats)
+   skickas till repot på GitHub exempelvis. PULL är motsatsen, och hämtar istället eventuella förändringar
+   från fjärr-repository till lokala repository. Skrivs som "git pull".
+
+2.När använder man log respektive status?
+
+   GIT STATUS visar ändringar som lagts i staging area och är redo för att bli committade. GIT LOG, å andra
+   sidan, visar historiken för commits.
+
+3.Vad är en Git branch och varför är de viktiga?
+
+   Git branch är som en gren med en separat kopia/version av ett arbete. Det är väldigt användbart när man vill 
+   experimentera och prova nya saker utan att påverka originalarbetet. Om man senare är nöjd med sina ändringar 
+   man välja att merga sitt arbete med originalet.
+
+4.Det finns flera sätt att rulla tillbaka koden till ett tidigare tillstånd. Förklara skillnaden och
+   motivera när man skulle använda den ena eller andra metoden. Ge exempel på de kommandon du använder för 
+   att göra detta och visa att det fungerar, vilken output du fick från git-kommandona.
+
+   RESTORE används för att återställa filer från den senaste committen och ändrar varken historiken eller commit-
+   historiken. Säg till exempel att jag har en committad fil som jag arbetar i och gör flera ändringar i. Till slut 
+   märker jag att det bara blir fel och att jag vill ångra mig och gå tillbaka till den senaste committen. Jag har 
+   alltså ändrat i min fil men inte stageat den än. Då kan jag köra git restore file.txt så kommer filen 
+   återställas till senaste committen. Då kan jag se i git status att det är "nothing to commit" samt gå in i min 
+   fil att kontrollera att mina dåliga ändringar tagits bort. Git restore --staged tar bort en specifik fil från 
+   stageing arean.   
+
+   Git reset flyttar till senaste committen och här finns det tre olika varianter:
+
+   Git reset --soft går tillbaka en HEAD och behåller ändringar i både staging area och arbetskatalog. Låt säga 
+   att jag addar och committar denna textfil och skriver meddelandet "skrivit frågr". Sedan märker jag att jag 
+   stavat fel och dessutom har jag ett bättre meddelande att skriva! Då passar det bra att använda git reset --soft, 
+   då flyttas jag till min tidigare commit. För att kommandot ska fungera får jag specificera hur långt bak jag vill 
+   gå, vilket i detta fall är "HEAD ~1" som gör att jag går tillbaka ett steg. Då kan jag se i git log att mitt 
+   senaste commit-meddelande inte finns kvar. 
+   
+   Git reset --mixed (standard) avmarkerar ändringar i staging arean. Låt säga att jag har ett repository med 
+   filerna: file1.txt och file2.txt. Jag råkar vara lite för snabb och skriver "git add .", fast jag bara ville 
+   adda file1.txt till staging arean. Då använder jag git reset (--mixed) vilket resulterar i att båda filer 
+   tas bort från staging arean. Då kan jag börja om processen att adda rätt fil. När jag använder detta kommando 
+   blir det ingen särskild output, men jag kan se konsekvensen om jag kör git status, då kommer filerna listas som 
+   "untracked files" istället för "changes to be committed". Detta kommando är väldigt likt git restore --staged. En 
+   skillnad är att git reset --mixed tömmer hela staging arean och inte bara en specifik fil.
+  
+   Till sist har vi git reset --hard som tar bort ändringar permanent både från staging area och arbetskatalogen. 
+   Detta ska dock inte användas flitigt. Jag gör ändringar i file.txt, som jag senare ångrar. Då vill jag ta bort 
+   dessa ändringar och gå tillbaka till senaste committen. Då kör jag en git reset --hard som tar bort allting i både 
+   staging area och arbetskatalogen. Det enda som blir kvar är min senaste commit och detta kan jag se när jag kör 
+   git log.  
+   
